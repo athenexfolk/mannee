@@ -1,0 +1,12 @@
+<div
+  [style.background-color]="bgColor()"
+  [style.color]="textColor()"
+  class="h-28 rounded-xl shadow-lg p-4 grid grid-rows-[auto_1fr] gap-2"
+>
+  <h3 class="font-semibold">{{ title() }}</h3>
+  <div class="flex justify-end items-center">
+    <span class="text-3xl">{{
+      amount() | currency : "THB" : "symbol" : "1.2-2" : "th-TH"
+    }}</span>
+  </div>
+</div>

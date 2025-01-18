@@ -1,0 +1,11 @@
+<div class="p-2">
+  <p class="text-sm font-semibold">{{ transaction().name }}</p>
+  <p class="text-xs text-gray-400">{{ transaction().date | date }}</p>
+  <p
+    class="text-end font-semibold"
+    [class.text-green-700]="transaction().type === FinancialType.Income"
+    [class.text-red-700]="transaction().type === FinancialType.Expenses"
+  >
+    {{ transaction().amount | currency : "THB" : "symbol" : "1.2-2" : "th-TH" }}
+  </p>
+</div>

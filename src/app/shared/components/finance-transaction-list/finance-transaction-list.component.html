@@ -1,0 +1,17 @@
+<div class="grid grid-cols-2 container mx-auto max-w-lg">
+  <span class="text-center font-semibold">Income</span>
+  <span class="text-center font-semibold">Expenses</span>
+
+  @for (transaction of transactions(); track $index) {
+  <div>
+    @if (transaction.type === FinancialType.Income) {
+    <app-finance-transaction [transaction]="transaction" />
+    }
+  </div>
+  <div>
+    @if (transaction.type === FinancialType.Expenses) {
+    <app-finance-transaction [transaction]="transaction" />
+    }
+  </div>
+  }
+</div>

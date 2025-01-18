@@ -1,0 +1,90 @@
+<div
+  class="fixed top-0 left-0 w-full h-dvh bg-black/50 backdrop-blur-sm p-4 flex justify-center items-center"
+>
+  <div class="p-8 bg-white rounded-2xl space-y-4 max-w-lg mx-auto w-full">
+    <button
+      (click)="closed.emit()"
+      class="flex w-full justify-end items-center"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18 18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
+    <div>
+      <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4">
+        <div class="flex flex-col gap-2">
+          <label class="font-semibold text-sm" for="name"
+            >Transaction name
+            <span class="text-xs text-gray-300"
+              >({{ name?.value?.length }}/{{ maxNameLength }})</span
+            ></label
+          >
+          <input
+            id="name"
+            formControlName="name"
+            type="text"
+            placeholder="Name"
+            class="w-full rounded-lg"
+          />
+          @if (name?.hasError("required") && name?.touched) {
+          <span class="text-xs text-red-500"
+            >* Please provide transaction name.</span
+          >
+          } @if (name?.hasError("maxlength") && name?.touched) {
+          <span class="text-xs text-red-500"
+            >* Name is too long. (Max: 20)</span
+          >
+          }
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label class="font-semibold text-sm" for="amount">Amount</label>
+          <input
+            id="amount"
+            formControlName="amount"
+            type="text"
+            placeholder="Amount"
+            class="w-full rounded-lg"
+          />
+          @if (amount?.hasError("required") && amount?.touched) {
+          <span class="text-xs text-red-500"
+            >* Please provide transaction amount.</span
+          >
+          } @if (amount?.hasError("pattern") && amount?.touched) {
+          <span class="text-xs text-red-500"
+            >* Please input numeric or non-negative value.</span
+          >
+          }
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="font-semibold text-sm" for="type"
+            >Transaction type</label
+          >
+          <select id="type" formControlName="type" class="w-full rounded-lg">
+            @for (type of financialTypes; track $index) {
+            <option [value]="type">{{ type }}</option>
+            }
+          </select>
+        </div>
+        <button
+          type="submit"
+          [disabled]="form.invalid"
+          class="block w-full px-4 py-2 rounded-lg bg-green-700 text-white font-semibold disabled:bg-gray-200"
+        >
+          Add
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
